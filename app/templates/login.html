@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Giriş — İmza Kampanyası{% endblock %}
+
+{% block content %}
+<h1>Giriş</h1>
+{% if error %}<p class="error">{{ error }}</p>{% endif %}
+
+{% if settings.use_firebase %}
+    {# GÖREV T2.7 (Claude): Firebase e-posta + telefon girişi (static/js/auth.js) buraya gelecek. #}
+    <p>Firebase girişi hazırlanıyor.</p>
+{% else %}
+    <p class="muted">Demo modu: Firebase ayarlanmadı. Aşağıdaki hazır kullanıcılardan biriyle giriş yapabilirsin.</p>
+    {% for token, demo_user in demo_users.items() %}
+    <form method="post" action="{{ path_for('session_create') }}" class="inline">
+        <input type="hidden" name="id_token" value="{{ token }}">
+        <input type="hidden" name="next" value="{{ next }}">
+        <button type="submit" class="button secondary">{{ demo_user.display_name }}</button>
+    </form>
+    {% endfor %}
+{% endif %}
+{% endblock %}

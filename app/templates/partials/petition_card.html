@@ -1,0 +1,4 @@
+<li class="card">
+    <a href="{{ path_for('petition_detail', petition_id=petition.id) }}"><h3>{{ petition.title }}</h3></a>
+    <p class="muted">{{ petition.signature_count }} / {{ petition.goal }} imza</p>
+</li>

@@ -1,0 +1,68 @@
+/* Genel görünüm. Renkler ilk taslaktaki (tan) navbar'dan alındı. */
+:root {
+    --brand: tan;
+    --brand-dark: #a0825a;
+    --text: #222;
+    --muted: #666;
+    --bg: #faf8f5;
+    --error: #b00020;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.5;
+}
+
+.navbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background-color: var(--brand);
+}
+
+.navbar a, .navbar a:visited, .link-button { color: aliceblue; text-decoration: none; }
+.brand { font-weight: 700; font-size: 1.2rem; }
+.nav-links { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; }
+.nav-user { color: #fff; font-size: 0.9rem; }
+.link-button { background: none; border: none; cursor: pointer; font: inherit; padding: 0; }
+.inline { display: inline; }
+
+.container { max-width: 860px; margin: 0 auto; padding: 1.5rem 1rem; }
+.footer { text-align: center; color: var(--muted); padding: 2rem 1rem; font-size: 0.85rem; }
+
+.hero { text-align: center; padding: 2rem 0; }
+.button {
+    display: inline-block;
+    background: var(--brand-dark);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.6rem 1.2rem;
+    font: inherit;
+    cursor: pointer;
+    text-decoration: none;
+}
+.button.secondary { background: #555; margin: 0.25rem 0; }
+
+.card-list { list-style: none; padding: 0; display: grid; gap: 1rem; }
+.card { background: #fff; border-radius: 8px; padding: 1rem; box-shadow: 0 1px 3px rgb(0 0 0 / 10%); }
+.card h3 { margin: 0 0 0.25rem; }
+.muted { color: var(--muted); }
+
+.form { display: grid; gap: 0.5rem; }
+.form input, .form textarea, .search-form input { width: 100%; padding: 0.5rem; font: inherit; }
+.search-form { display: flex; gap: 0.5rem; }
+.error { color: var(--error); margin: 0; }
+.notice { background: #e8f5e9; padding: 0.75rem; border-radius: 6px; }
+
+.progress progress { width: 100%; height: 1.25rem; accent-color: var(--brand-dark); }
+.description { white-space: pre-line; margin-top: 1.5rem; }
+.share a { margin-right: 0.75rem; text-transform: capitalize; }

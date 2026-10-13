@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Ara — İmza Kampanyası{% endblock %}
+
+{% block content %}
+<h1>Kampanya ara</h1>
+<form method="get" action="{{ path_for('search') }}" class="search-form">
+    <input name="q" value="{{ query }}" placeholder="ör. kampüs bisiklet yolu" aria-label="Arama">
+    <button type="submit" class="button">Ara</button>
+</form>
+
+{% if query %}
+    {% if results %}
+    <ul class="card-list">
+        {% for petition in results %}
+            {% include "partials/petition_card.html" %}
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>"{{ query }}" için sonuç bulunamadı.</p>
+    {% endif %}
+{% endif %}
+{% endblock %}

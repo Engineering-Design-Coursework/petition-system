@@ -1,0 +1,9 @@
+{# İlerleme çubuğu. htmx her 5 saniyede /petitions/<id>/progress adresinden bu parçayı yeniler.
+   data-count / data-goal / data-percent testler tarafından okunur — SİLMEYİN. #}
+<div id="progress" class="progress"
+     hx-get="{{ path_for('petition_progress', petition_id=petition.id) }}"
+     hx-trigger="every 5s" hx-swap="outerHTML"
+     data-count="{{ petition.signature_count }}" data-goal="{{ petition.goal }}" data-percent="{{ percent }}">
+    <progress value="{{ percent }}" max="100">%{{ percent }}</progress>
+    <p><strong>{{ petition.signature_count }}</strong> / {{ petition.goal }} imza (%{{ percent }})</p>
+</div>

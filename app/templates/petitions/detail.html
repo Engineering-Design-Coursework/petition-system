@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}{{ petition.title }} — İmza Kampanyası{% endblock %}
+
+{% block meta %}
+{# Open Graph: link sosyal medyada paylaşılınca görünen başlık/açıklama #}
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ petition.title }}">
+<meta property="og:description" content="{{ petition.description[:200] }}">
+<meta property="og:url" content="{{ share_url }}">
+{% endblock %}
+
+{% block content %}
+<article class="petition">
+    <h1>{{ petition.title }}</h1>
+
+    {% if message %}<p class="notice" data-message>{{ message }}</p>{% endif %}
+
+    {% include "partials/progress.html" %}
+
+    <form method="post" action="{{ path_for('petition_sign', petition_id=petition.id) }}">
+        <button type="submit" class="button">Bu kampanyayı imzala</button>
+    </form>
+
+    <div class="description">{{ petition.description }}</div>
+
+    {% if share_links %}
+    <section class="share">
+        <h2>Paylaş</h2>
+        {% for platform, link in share_links.items() %}
+            <a class="share-{{ platform }}" href="{{ link }}" target="_blank" rel="noopener">{{ platform }}</a>
+        {% endfor %}
+    </section>
+    {% endif %}
+</article>
+{% endblock %}
