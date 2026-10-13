@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}İmza Kampanyası{% endblock %}</title>
+    {% block meta %}{% endblock %}
+    <link rel="stylesheet" href="{{ path_for('static', path='css/style.css') }}">
+    {# htmx: JS yazmadan sayfanın bir parçasını yenilemeyi sağlar (ilerleme çubuğu) #}
+    <script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
+</head>
+<body>
+<nav class="navbar">
+    <a class="brand" href="{{ path_for('home') }}">İmza Kampanyası</a>
+    <div class="nav-links">
+        <a href="{{ path_for('petition_list') }}">Kampanyalar</a>
+        <a href="{{ path_for('petition_new') }}">Kampanya başlat</a>
+        <a href="{{ path_for('search') }}">Ara</a>
+        {% if user %}
+            <span class="nav-user">{{ user.display_name or user.email or user.phone_number }}</span>
+            <form method="post" action="{{ path_for('logout') }}" class="inline">
+                <button type="submit" class="link-button">Çıkış</button>
+            </form>
+        {% else %}
+            <a href="{{ path_for('login') }}">Giriş</a>
+        {% endif %}
+    </div>
+</nav>
+
+<main class="container">
+    {% block content %}{% endblock %}
+</main>
+
+<footer class="footer">CEN317 Engineering Design — Çukurova Üniversitesi</footer>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Kampanyalar — İmza Kampanyası{% endblock %}
+
+{% block content %}
+<h1>Kampanyalar</h1>
+{% if petitions %}
+<ul class="card-list">
+    {% for petition in petitions %}
+        {% include "partials/petition_card.html" %}
+    {% endfor %}
+</ul>
+{% else %}
+<p>Henüz kampanya yok. <a href="{{ path_for('petition_new') }}">İlkini sen başlat!</a></p>
+{% endif %}
+{% endblock %}

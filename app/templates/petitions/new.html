@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Kampanya başlat — İmza Kampanyası{% endblock %}
+
+{% block content %}
+<h1>Kampanya başlat</h1>
+<form method="post" action="{{ path_for('petition_create') }}" class="form">
+    <label for="title">Başlık (10–150 karakter)</label>
+    <input id="title" name="title" value="{{ form.title or '' }}" required minlength="10" maxlength="150">
+    {% if errors.title %}<p class="error" data-error="title">{{ errors.title }}</p>{% endif %}
+
+    <label for="description">Açıklama (50–5000 karakter)</label>
+    <textarea id="description" name="description" rows="8" required minlength="50" maxlength="5000">{{ form.description or '' }}</textarea>
+    {% if errors.description %}<p class="error" data-error="description">{{ errors.description }}</p>{% endif %}
+
+    <label for="goal">İmza hedefi (10–1.000.000)</label>
+    <input id="goal" name="goal" type="number" value="{{ form.goal or '' }}" required min="10" max="1000000">
+    {% if errors.goal %}<p class="error" data-error="goal">{{ errors.goal }}</p>{% endif %}
+
+    <button type="submit" class="button">Yayınla</button>
+</form>
+{% endblock %}

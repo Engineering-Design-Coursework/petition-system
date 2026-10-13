@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}Bulunamadı — İmza Kampanyası{% endblock %}
+
+{% block content %}
+<h1>Sayfa bulunamadı</h1>
+<p>Aradığın kampanya silinmiş ya da hiç var olmamış olabilir.</p>
+<a class="button" href="{{ path_for('petition_list') }}">Kampanyalara dön</a>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+    <h1>Sesini duyur, değişimi başlat.</h1>
+    <p>Toplumsal ya da kurum içi bir sorun için imza kampanyası başlat, destek topla.</p>
+    <a class="button" href="{{ path_for('petition_new') }}">Kampanya başlat</a>
+</section>
+
+{% if petitions %}
+<h2>Son kampanyalar</h2>
+<ul class="card-list">
+    {% for petition in petitions %}
+        {% include "partials/petition_card.html" %}
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}
