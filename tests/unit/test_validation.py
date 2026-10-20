@@ -13,9 +13,6 @@ from app.domain.validation import (
 )
 from tests.helpers import VALID_DESCRIPTION, VALID_GOAL, VALID_TITLE
 
-# GÖREV T1.2 — kodu yazınca BU SATIRI SİL:
-pytestmark = pytest.mark.xfail(strict=True, reason="T1.2 henüz yapılmadı")
-
 
 def test_should_return_no_errors_when_all_fields_are_valid():
     assert validate_petition_input(VALID_TITLE, VALID_DESCRIPTION, VALID_GOAL) == {}
