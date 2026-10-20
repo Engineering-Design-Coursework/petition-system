@@ -4,9 +4,6 @@ import pytest
 
 from app.domain.models import User
 
-# GÖREV T1.1 — kodu yazınca BU SATIRI SİL:
-pytestmark = pytest.mark.xfail(strict=True, reason="T1.1 henüz yapılmadı")
-
 
 @pytest.mark.parametrize(
     ("email", "email_verified", "phone", "expected"),
