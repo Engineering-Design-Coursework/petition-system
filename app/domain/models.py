@@ -25,13 +25,12 @@ class User:
 
     @property
     def is_verified(self) -> bool:
-        """GÖREV T1.1 — tests/unit/test_models.py
-
-        Kullanıcı doğrulanmış sayılır, eğer:
-          - e-postası var VE e-postası doğrulanmışsa, ya da
-          - telefon numarası varsa (Firebase telefonu SMS ile zaten doğrular).
-        """
-        raise NotImplementedError
+        if self.email is not None:
+            if self.email_verified:
+                return True
+        if self.phone_number is not None:
+            return True
+        return False
 
 
 @dataclass
