@@ -3,7 +3,7 @@
 from dataclasses import dataclass
 from enum import StrEnum
 
-from app.domain.models import Petition, User
+from app.domain.models import Petition, PetitionStatus, User
 
 
 class SignBlockReason(StrEnum):
@@ -20,13 +20,13 @@ class SignDecision:
 
 
 def check_can_sign(user: User | None, petition: Petition, already_signed: bool) -> SignDecision:
-    """GÖREV T2.1
+    if user is None:
+        return SignDecision(False, SignBlockReason.NOT_LOGGED_IN)
+    elif petition.status == PetitionStatus.CLOSED:
+        return SignDecision(False, SignBlockReason.PETITION_CLOSED)
+    elif not user.is_verified:
+        return SignDecision(False, SignBlockReason.NOT_VERIFIED)
+    elif already_signed:
+        return SignDecision(False, SignBlockReason.ALREADY_SIGNED)
 
-    Kurallar YUKARIDAN AŞAĞIYA kontrol edilir, ilk uyan kural sonucu belirler:
-      1. user None ise                        -> SignDecision(False, NOT_LOGGED_IN)
-      2. kampanya kapalıysa (CLOSED)          -> SignDecision(False, PETITION_CLOSED)
-      3. kullanıcı doğrulanmamışsa            -> SignDecision(False, NOT_VERIFIED)
-      4. daha önce imzalamışsa                -> SignDecision(False, ALREADY_SIGNED)
-      5. aksi halde                           -> SignDecision(True, None)
-    """
-    raise NotImplementedError
+    return SignDecision(True, None)
