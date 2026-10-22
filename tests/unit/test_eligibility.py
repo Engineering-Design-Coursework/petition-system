@@ -17,9 +17,6 @@ from app.domain.eligibility import SignBlockReason, SignDecision, check_can_sign
 from app.domain.models import PetitionStatus
 from tests.helpers import EMAIL_USER, PHONE_USER, UNVERIFIED_USER, make_petition
 
-# GÖREV T2.1 — kodu yazınca BU SATIRI SİL:
-pytestmark = pytest.mark.xfail(strict=True, reason="T2.1 henüz yapılmadı")
-
 OPEN = make_petition(id="1")
 CLOSED = make_petition(id="2", status=PetitionStatus.CLOSED)
 R = SignBlockReason

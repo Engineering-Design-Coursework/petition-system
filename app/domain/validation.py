@@ -8,8 +8,6 @@ GOAL_MIN = 10
 GOAL_MAX = 1_000_000
 
 
-
-
 def validate_petition_input(title: str, description: str, goal: int) -> dict[str, str]:
     errors = {}
     if not title:
