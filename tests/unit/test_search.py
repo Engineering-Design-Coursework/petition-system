@@ -4,9 +4,6 @@ import pytest
 
 from app.domain.search import matches_query, normalize_text
 
-# GÖREV T1.4 — kodu yazınca BU SATIRI SİL:
-pytestmark = pytest.mark.xfail(strict=True, reason="T1.4 henüz yapılmadı")
-
 
 @pytest.mark.parametrize(
     ("text", "expected"),
