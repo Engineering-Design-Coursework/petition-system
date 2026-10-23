@@ -4,7 +4,7 @@
   Items marked TODO need team input; references marked (verify) must be checked before submission.
 -->
 
-> **Last updated:** 13 October 2026 — project scaffold, CI and contract test suite completed (Phase 0).
+> **Last updated:** 23 October 2026 — T1.1, T1.2, T1.3 and T2.1 completed.
 
 <div align="center">
 
@@ -375,14 +375,14 @@ The following parts are complete:
 
 | Task | Description | Status |
 |---|---|---|
-| T1.1 | User verification rule | Pending |
-| T1.2 | Form validation (EP/BVA) | Pending |
-| T1.3 | Progress percentage | Pending |
+| T1.1 | User verification rule | Done |
+| T1.2 | Form validation (EP/BVA) | Done |
+| T1.3 | Progress percentage | Done |
 | T1.4 | Turkish-aware search | Pending |
 | T1.5 | In-memory repository | Pending |
 | T1.6 | Campaign service | Pending |
 | T1.7 | Campaign pages | Pending |
-| T2.1 | Signature eligibility (decision table) | Pending |
+| T2.1 | Signature eligibility (decision table) | Done |
 | T2.2 | Signature service | Pending |
 | T2.3 | Share links | Pending |
 | T2.4 | Firebase token verification | Pending |

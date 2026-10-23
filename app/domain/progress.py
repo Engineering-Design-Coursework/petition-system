@@ -9,9 +9,19 @@ def progress_percent(count: int, goal: int) -> int:
       - Hedef aşılsa bile en fazla 100 döner.
       - count < 0 ya da goal <= 0 ise ValueError fırlatır.
     """
-    raise NotImplementedError
+    # Geçersiz değerler
+    if count < 0 or goal <= 0:
+        raise ValueError("Geçersiz sayı ya da hedef")
+
+    # Tam sayı bölme aşağı yuvarlar
+    percent = count * 100 // goal
+
+    # En fazla 100
+    if percent > 100:
+        return 100
+    return percent
 
 
 def is_goal_reached(count: int, goal: int) -> bool:
     """GÖREV T1.3 — imza sayısı hedefe eşit ya da büyükse True."""
-    raise NotImplementedError
+    return count >= goal

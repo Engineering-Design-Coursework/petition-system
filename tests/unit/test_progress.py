@@ -4,9 +4,6 @@ import pytest
 
 from app.domain.progress import is_goal_reached, progress_percent
 
-# GÖREV T1.3 — kodu yazınca BU SATIRI SİL:
-pytestmark = pytest.mark.xfail(strict=True, reason="T1.3 henüz yapılmadı")
-
 
 @pytest.mark.parametrize(
     ("count", "goal", "expected"),
