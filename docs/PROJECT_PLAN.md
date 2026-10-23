@@ -35,7 +35,7 @@ Görevler kişiye atanmamıştır; ekip kendi arasında paylaşır. Kodlama gör
 - [x] **T1.1** Kullanıcı doğrulanmış mı — `app/domain/models.py` → `tests/unit/test_models.py`
 - [x] **T1.2** Form doğrulama — `app/domain/validation.py` → `tests/unit/test_validation.py`
 - [x] **T1.3** İlerleme yüzdesi — `app/domain/progress.py` → `tests/unit/test_progress.py`
-- [ ] **T1.4** Türkçe arama — `app/domain/search.py` → `tests/unit/test_search.py`
+- [x] **T1.4** Türkçe arama — `app/domain/search.py` → `tests/unit/test_search.py`
 - [ ] **T1.5** Bellek içi veritabanı — `app/repositories/memory.py` → `tests/unit/test_memory_repository.py` (önce T1.4)
 - [ ] **T1.6** Kampanya servisi — `app/services/petition_service.py` → `tests/unit/test_petition_service.py` (önce T1.2, T1.5)
 - [ ] **T1.7** Kampanya sayfaları — `app/routes/pages.py` → `tests/integration/test_petition_pages.py` (önce T1.3, T1.6)
