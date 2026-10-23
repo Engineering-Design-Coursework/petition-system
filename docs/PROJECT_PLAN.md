@@ -1,6 +1,6 @@
 # Proje Planı
 
-**Son güncelleme:** 13 Ekim 2026
+**Son güncelleme:** 23 Ekim 2026
 
 Görevler kişiye atanmamıştır; ekip kendi arasında paylaşır. Kodlama görevlerinin testleri hazırdır
 (`python scripts/check.py` en altta hangi görevin bitip hangisinin beklediğini gösterir).
@@ -32,9 +32,9 @@ Görevler kişiye atanmamıştır; ekip kendi arasında paylaşır. Kodlama gör
 - [ ] Proje adına karar verin (raporda ve sitede kullanılacak)
 
 ## Faz 1 — Kampanya çekirdeği (17–23 Ekim)
-- [ ] **T1.1** Kullanıcı doğrulanmış mı — `app/domain/models.py` → `tests/unit/test_models.py`
-- [ ] **T1.2** Form doğrulama — `app/domain/validation.py` → `tests/unit/test_validation.py`
-- [ ] **T1.3** İlerleme yüzdesi — `app/domain/progress.py` → `tests/unit/test_progress.py`
+- [x] **T1.1** Kullanıcı doğrulanmış mı — `app/domain/models.py` → `tests/unit/test_models.py`
+- [x] **T1.2** Form doğrulama — `app/domain/validation.py` → `tests/unit/test_validation.py`
+- [x] **T1.3** İlerleme yüzdesi — `app/domain/progress.py` → `tests/unit/test_progress.py`
 - [ ] **T1.4** Türkçe arama — `app/domain/search.py` → `tests/unit/test_search.py`
 - [ ] **T1.5** Bellek içi veritabanı — `app/repositories/memory.py` → `tests/unit/test_memory_repository.py` (önce T1.4)
 - [ ] **T1.6** Kampanya servisi — `app/services/petition_service.py` → `tests/unit/test_petition_service.py` (önce T1.2, T1.5)
@@ -43,7 +43,7 @@ Görevler kişiye atanmamıştır; ekip kendi arasında paylaşır. Kodlama gör
 - [ ] Demo modunda uçtan uca elle deneme: kampanya aç → listede gör → ara → detayını aç
 
 ## Faz 2 — İmza ve doğrulama (24–30 Ekim)
-- [ ] **T2.1** İmza uygunluğu (karar tablosu) — `app/domain/eligibility.py` → `tests/unit/test_eligibility.py` (önce T1.1)
+- [x] **T2.1** İmza uygunluğu (karar tablosu) — `app/domain/eligibility.py` → `tests/unit/test_eligibility.py` (önce T1.1)
 - [ ] **T2.2** İmza servisi — `app/services/signature_service.py` → `tests/unit/test_signature_service.py` (önce T1.5, T2.1)
 - [ ] **T2.3** Paylaşım linkleri — `app/domain/share.py` → `tests/unit/test_share.py`
 - [ ] **T2.4** Firebase token doğrulama — `app/auth/verifier.py` → `tests/unit/test_firebase_verifier.py`
