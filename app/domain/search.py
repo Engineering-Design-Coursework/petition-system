@@ -13,7 +13,17 @@ def normalize_text(text: str) -> str:
 
     Örnek: "  KAMPÜS   Işıkları " -> "kampus isiklari"
     """
-    raise NotImplementedError
+    # Önce İ ve I elle küçültülür
+    text = text.replace("İ", "i").replace("I", "ı")
+    text = text.lower()
+
+    # Türkçe harfler Latin harfe çevrilir
+    turkish = {"ç": "c", "ğ": "g", "ı": "i", "ö": "o", "ş": "s", "ü": "u"}
+    for letter, latin in turkish.items():
+        text = text.replace(letter, latin)
+
+    # Fazla boşluklar silinir
+    return " ".join(text.split())
 
 
 def matches_query(text: str, query: str) -> bool:
@@ -23,4 +33,10 @@ def matches_query(text: str, query: str) -> bool:
     geçiyorsa True döner. Kelimelerin sırası önemli değildir.
     Boş ya da sadece boşluktan oluşan sorgu her metinle eşleşir (True).
     """
-    raise NotImplementedError
+    text = normalize_text(text)
+
+    # Her kelime metinde olmalı
+    for word in normalize_text(query).split():
+        if word not in text:
+            return False
+    return True
