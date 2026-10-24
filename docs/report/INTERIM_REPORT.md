@@ -46,7 +46,7 @@ design separates pure domain rules, repositories, services and web routes so tha
 isolation. Development follows test-driven development (TDD) with a "contract-first" approach adapted from the
 CEN315 Introduction to Test Engineering course: the complete test suite of a phase is written before the
 implementation, unfinished tasks are marked as strict expected failures, and a GitHub Actions pipeline runs static
-analysis, the test suite and branch-coverage measurement on every push. Test cases are derived with equivalence
+analysis, the test suite and branch-coverage measurement on every pull request. Test cases are derived with equivalence
 partitioning, boundary value analysis, decision tables and MC/DC-style condition analysis, and are prioritised with a
 risk-based (likelihood × impact × detectability) assessment.
 
@@ -258,7 +258,7 @@ flowchart LR
 | Database | Google Firestore | Managed, free tier, transactions for unique signatures |
 | Testing | pytest, pytest-cov, FastAPI TestClient, unittest.mock | Unit/integration tests, branch coverage, test doubles |
 | Static analysis | ruff | Style and bug-pattern checks |
-| CI | GitHub Actions | Runs checks on every push and pull request |
+| CI | GitHub Actions | Runs checks on every pull request and every push to `main` |
 | Hosting | Render | Free Python hosting (GitHub Pages cannot run server code) |
 
 **Key design decisions** (full list in `docs/DECISIONS.md`):
@@ -349,7 +349,7 @@ Risks were scored with RPN = likelihood × impact × detectability (1–5 each);
 
 #### 3.3.5. Continuous integration and quality measurement
 
-On every push and pull request GitHub Actions installs the dependencies, runs ruff (static analysis and formatting),
+On every pull request and every push to `main` GitHub Actions installs the dependencies, runs ruff (static analysis and formatting),
 runs the test suite with branch coverage, publishes a task-status table on the run summary page and uploads an HTML
 coverage report. Branch coverage of the domain and service layers is targeted at 85 % or more; because coverage only
 measures reachability, mutation testing with mutmut will be added in Phase 3 to measure whether the assertions detect
@@ -382,7 +382,7 @@ The following parts are complete:
   each downloads a personal service-account key that never enters the repository. The server verifies Firebase ID
   tokens (T2.4, tested with a mock of the Firebase SDK), and the sign-in page (T2.7) supports e-mail with a
   verification e-mail and SMS codes; an unverified e-mail address cannot open a session.
-- **Continuous integration.** The pipeline described in Section 3.3.5 runs on every push.
+- **Continuous integration.** The pipeline described in Section 3.3.5 runs on every pull request.
 - **Documentation.** README with installation and a step-by-step development guide for team members who work
   without an AI assistant, project plan with deadlines, test strategy, architecture decision records.
 
