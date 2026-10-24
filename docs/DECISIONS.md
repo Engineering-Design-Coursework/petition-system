@@ -52,3 +52,11 @@ Her karar: bağlam → karar → değerlendirilen alternatifler → sonuçlar. Y
 - **Karar:** Firebase ayarları yoksa uygulama bellek içi veritabanı ve hazır demo kullanıcılarla çalışır.
   `APP_ENV=prod` iken Firebase ve `SECRET_KEY` zorunludur (yoksa uygulama başlamaz).
 - **Sonuç:** Yeni bir bilgisayarda hiçbir hesap açmadan proje çalıştırılabilir ve geliştirilebilir.
+
+## ADR-10 — Firebase projesine ekip erişimi (24 Eki 2026)
+- **Karar:** Projeyi (`imza-kampanyasi-cen317`) tek kişi kurar, diğer üyeler Console'dan **Editör** olarak eklenir.
+  Herkes kendi servis hesabı anahtarını indirir (`firebase-key.json`); anahtar paylaşılmaz. Web ayarları
+  (`FIREBASE_API_KEY` vb.) gizli değildir, ekipte paylaşılabilir. Ücretsiz Spark planı, Firestore `europe-west1`,
+  güvenlik kuralları production modu (yalnızca sunucu Admin SDK ile erişir).
+- **Alternatifler:** Tek anahtarı herkesle paylaşmak (sızarsa kimden sızdığı bilinmez, iptal herkesi etkiler) — reddedildi.
+- **Sonuç:** Anahtarlar kişi bazında iptal edilebilir. Firebase'e erişimi olmayan üye demo modunda çalışmaya devam eder.

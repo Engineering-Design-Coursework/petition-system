@@ -1,6 +1,6 @@
 # Proje Planı
 
-**Son güncelleme:** 23 Ekim 2026
+**Son güncelleme:** 24 Ekim 2026
 
 Görevler kişiye atanmamıştır; ekip kendi arasında paylaşır. Kodlama görevlerinin testleri hazırdır
 (`python scripts/check.py` en altta hangi görevin bitip hangisinin beklediğini gösterir).
@@ -27,7 +27,7 @@ Görevler kişiye atanmamıştır; ekip kendi arasında paylaşır. Kodlama gör
 - [x] README (kurulum + elle geliştirme rehberi), AGENTS.md, test stratejisi, kararlar, rapor iskeleti (Claude)
 - [ ] Her iki ekip üyesi kendi bilgisayarında README'deki kurulumu yapıp `python scripts/check.py` ile "HER ŞEY TAMAM" görür
 - [ ] Gereksinim listesini ([TEST_STRATEGY §2](TEST_STRATEGY.md#2-gereksinimler)) birlikte okuyup onaylayın (testability review)
-- [ ] Firebase projesi oluştur (README §4, adım 1–3), test telefon numaralarını ekle
+- [x] Firebase projesi oluştur (README §4, adım 1–3), test telefon numaralarını ekle
 - [ ] GitHub → Settings → Branches: `main` için "Require status checks (CI) to pass" kuralı
 - [ ] Proje adına karar verin (raporda ve sitede kullanılacak)
 
@@ -50,7 +50,7 @@ Görevler kişiye atanmamıştır; ekip kendi arasında paylaşır. Kodlama gör
 - [ ] **T2.5** İmza sayfası + canlı ilerleme + paylaşım — `app/routes/pages.py` → `tests/integration/test_signing.py` (önce T1.7, T2.2, T2.3)
 - [ ] **T2.6** Firestore veritabanı — `app/repositories/firestore.py` (docstring'deki örnek; elle test, Faz 3'te emulator testi)
 - [ ] **T2.7** Giriş sayfası: Firebase e-posta (doğrulama e-postası) + telefon (SMS) girişi, `static/js/auth.js` (Claude)
-- [ ] **T2.8** Firebase Console: web uygulaması + servis hesabı anahtarı, `.env` doldurma (README §4)
+- [x] **T2.8** Firebase Console: web uygulaması + servis hesabı anahtarı, `.env` doldurma (README §4)
 - [ ] Gerçek Firebase ile elle deneme: e-posta ile kayıt → doğrulama → imza; aynı hesapla ikinci imza reddedilir
 
 ## Ara rapor (31 Ekim – 1 Kasım, teslim ≈ 2 Kasım)
