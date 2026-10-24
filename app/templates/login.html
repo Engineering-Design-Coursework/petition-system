@@ -7,8 +7,36 @@
 {% if error %}<p class="error">{{ error }}</p>{% endif %}
 
 {% if settings.use_firebase %}
-    {# GÖREV T2.7 (Claude): Firebase e-posta + telefon girişi (static/js/auth.js) buraya gelecek. #}
-    <p>Firebase girişi hazırlanıyor.</p>
+    {# Firebase girişi: static/js/auth.js bu bölümü kullanır #}
+    <div id="firebase-login"
+         data-config='{{ settings.firebase_web_config | tojson }}'
+         data-next="{{ next }}"
+         data-session-url="{{ path_for('session_create') }}">
+
+        <p class="error" data-auth-message aria-live="polite"></p>
+
+        <h2>E-posta ile</h2>
+        <form class="form" data-email-form>
+            <label>E-posta <input type="email" name="email" required autocomplete="email"></label>
+            <label>Şifre <input type="password" name="password" required minlength="6" autocomplete="current-password"></label>
+            <div>
+                <button type="submit" class="button" name="action" value="login">Giriş yap</button>
+                <button type="submit" class="button secondary" name="action" value="register">Kayıt ol</button>
+            </div>
+        </form>
+
+        <h2>Telefon ile</h2>
+        <form class="form" data-phone-form>
+            <label>Telefon <input type="tel" name="phone" placeholder="+905551112233" required autocomplete="tel"></label>
+            <button type="submit" class="button">Kod gönder</button>
+        </form>
+        <form class="form" data-code-form hidden>
+            <label>SMS kodu <input type="text" name="code" inputmode="numeric" required autocomplete="one-time-code"></label>
+            <button type="submit" class="button">Doğrula</button>
+        </form>
+        <div id="recaptcha"></div>
+    </div>
+    <script type="module" src="{{ path_for('static', path='js/auth.js') }}"></script>
 {% else %}
     <p class="muted">Demo modu: Firebase ayarlanmadı. Aşağıdaki hazır kullanıcılardan biriyle giriş yapabilirsin.</p>
     {% for token, demo_user in demo_users.items() %}
