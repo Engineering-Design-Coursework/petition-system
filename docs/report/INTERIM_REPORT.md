@@ -385,7 +385,7 @@ The following parts are complete:
 | T2.1 | Signature eligibility (decision table) | Done |
 | T2.2 | Signature service | Pending |
 | T2.3 | Share links | Pending |
-| T2.4 | Firebase token verification | Pending |
+| T2.4 | Firebase token verification | Done |
 | T2.5 | Signing page, live progress, sharing | Pending |
 
 <!-- TODO: Figure 4.1 home page screenshot, Figure 4.2 CI summary screenshot, coverage figures. -->

@@ -46,7 +46,7 @@ Görevler kişiye atanmamıştır; ekip kendi arasında paylaşır. Kodlama gör
 - [x] **T2.1** İmza uygunluğu (karar tablosu) — `app/domain/eligibility.py` → `tests/unit/test_eligibility.py` (önce T1.1)
 - [ ] **T2.2** İmza servisi — `app/services/signature_service.py` → `tests/unit/test_signature_service.py` (önce T1.5, T2.1)
 - [ ] **T2.3** Paylaşım linkleri — `app/domain/share.py` → `tests/unit/test_share.py`
-- [ ] **T2.4** Firebase token doğrulama — `app/auth/verifier.py` → `tests/unit/test_firebase_verifier.py`
+- [x] **T2.4** Firebase token doğrulama — `app/auth/verifier.py` → `tests/unit/test_firebase_verifier.py`
 - [ ] **T2.5** İmza sayfası + canlı ilerleme + paylaşım — `app/routes/pages.py` → `tests/integration/test_signing.py` (önce T1.7, T2.2, T2.3)
 - [ ] **T2.6** Firestore veritabanı — `app/repositories/firestore.py` (docstring'deki örnek; elle test, Faz 3'te emulator testi)
 - [ ] **T2.7** Giriş sayfası: Firebase e-posta (doğrulama e-postası) + telefon (SMS) girişi, `static/js/auth.js` (Claude)
