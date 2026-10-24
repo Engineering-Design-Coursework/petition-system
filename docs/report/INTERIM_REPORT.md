@@ -4,7 +4,7 @@
   Items marked TODO need team input; references marked (verify) must be checked before submission.
 -->
 
-> **Last updated:** 24 October 2026 — T1.1–T1.5 and T2.1 completed; Firebase project set up.
+> **Last updated:** 24 October 2026 — T1.1–T1.5, T2.1, T2.4 and T2.7 completed; Firebase project set up.
 
 <div align="center">
 
@@ -18,6 +18,7 @@ DEPARTMENT OF COMPUTER ENGINEERING
 **DESIGN AND IMPLEMENTATION OF A VERIFIED ONLINE PETITION PLATFORM**
 <!-- TODO: replace with the final project name -->
 
+STUDENT NUMBER – NAME <!-- TODO -->
 STUDENT NUMBER – NAME <!-- TODO -->
 STUDENT NUMBER – NAME <!-- TODO -->
 
@@ -49,11 +50,13 @@ analysis, the test suite and branch-coverage measurement on every push. Test cas
 partitioning, boundary value analysis, decision tables and MC/DC-style condition analysis, and are prioritised with a
 risk-based (likelihood × impact × detectability) assessment.
 
-At the time of writing, the architecture, the project skeleton, the continuous integration pipeline and the contract
-test suite for the first two phases (176 tests, 25 passing infrastructure tests and 151 tests awaiting implementation)
-are complete. <!-- TODO: update with Phase 1–2 results before submission --> The remaining work covers the
-implementation of the campaign and signature features, the Firebase integration, deployment, mutation testing,
-end-to-end tests and a user acceptance test with fellow students.
+At the time of writing, the architecture, the project skeleton, the continuous integration pipeline, the domain
+rules (user verification, form validation, progress percentage, Turkish-aware search and signature eligibility), the
+in-memory repository and the Firebase sign-in (server-side token verification and an e-mail/SMS sign-in page) are
+complete; 113 of the 183 tests pass and the remaining 70 belong to tasks still in progress.
+<!-- TODO: update with Phase 2 results before submission --> The remaining work covers the campaign and signature
+services and pages, the Firestore repository, deployment, mutation testing, end-to-end tests and a user acceptance
+test with fellow students.
 
 **Keywords:** online petition, duplicate signature prevention, Firebase Authentication, FastAPI, test-driven development
 
@@ -356,7 +359,7 @@ injected faults.
 
 ## 4. CURRENT STATE OF THE PROJECT
 
-*Status on 13 October 2026 (end of Phase 0).* <!-- TODO: update after Phases 1–2 -->
+*Status on 24 October 2026 (Phase 2 in progress).*
 
 The following parts are complete:
 
@@ -364,9 +367,21 @@ The following parts are complete:
   The application factory, configuration loading, session handling, sign-in/sign-out endpoints, error pages, base
   templates and styling are in place. Without Firebase credentials the application runs in a *demo mode* with an
   in-memory database and predefined demo users, so it can be run on any computer immediately.
-- **Contract test suite for Phases 1 and 2.** 176 tests define the behaviour of twelve tasks (Table 4.1).
-  25 tests for the finished infrastructure pass; 151 tests await implementation. All 176 were verified to pass against
-  a reference solution.
+- **Contract test suite for Phases 1 and 2.** 183 tests define the behaviour of thirteen tasks (Table 4.1); every
+  suite was verified against a reference solution before it was added. 113 tests pass and 70 tests belong to tasks
+  that are not finished yet.
+- **Domain rules.** The user verification rule (T1.1, tested with condition/MC/DC cases), campaign form validation
+  (T1.2, equivalence partitioning and boundary values), the progress percentage (T1.3, rounded down and capped at
+  100 %), Turkish-aware search normalisation (T1.4, e.g. "İ"/"I" and "ü"/"u") and the signature eligibility decision
+  table (T2.1). Branch coverage of these modules is 100 %.
+- **In-memory repository (T1.5).** Used as a *fake* in the tests and as the database of the demo mode. It rejects a
+  second signature of the same account on the same campaign, which mirrors the rule the Firestore repository will
+  enforce with a transaction.
+- **Firebase integration.** A Firebase project was created on the free Spark plan (Firestore in `europe-west1`,
+  e-mail/password and phone providers, test phone numbers for development). Team members are added as editors and
+  each downloads a personal service-account key that never enters the repository. The server verifies Firebase ID
+  tokens (T2.4, tested with a mock of the Firebase SDK), and the sign-in page (T2.7) supports e-mail with a
+  verification e-mail and SMS codes; an unverified e-mail address cannot open a session.
 - **Continuous integration.** The pipeline described in Section 3.3.5 runs on every push.
 - **Documentation.** README with installation and a step-by-step development guide for team members who work
   without an AI assistant, project plan with deadlines, test strategy, architecture decision records.
@@ -389,6 +404,9 @@ The following parts are complete:
 | T2.5 | Signing page, live progress, sharing | Pending |
 | T2.7 | Firebase sign-in page (e-mail + SMS) | Done |
 
+Phase 1 ended on 23 October with the campaign service and pages (T1.6, T1.7) still open; they are being finished
+together with the remaining Phase 2 tasks before the interim report.
+
 <!-- TODO: Figure 4.1 home page screenshot, Figure 4.2 CI summary screenshot, coverage figures. -->
 
 Source code excerpts are given in Appendix A and the folder structure in Appendix C.
@@ -399,10 +417,8 @@ Source code excerpts are given in Appendix A and the folder structure in Appendi
 
 | Period | Planned work |
 |---|---|
-| 17–23 Oct 2026 | Campaign core: validation, progress, search, repository, campaign service and pages |
-| 24–30 Oct 2026 | Signatures: eligibility rules, signature service, Firebase sign-in (e-mail + SMS), Firestore repository, live progress bar, share links |
-| 10–23 Nov 2026 | Instructor feedback; campaign closing by its owner; coverage gate (≥ 85 %); mutation testing; Firestore emulator tests; 2–3 end-to-end browser tests; deployment to Render; dependency vulnerability scanning; accessibility review |
-| 24 Nov – 6 Dec 2026 | User acceptance test with at least five students using written acceptance criteria; fixes; final report and presentation |
+| 24 Oct – 1 Nov 2026 | Campaign service and pages, page design, signature service, share links, signing page with the live progress bar, Firestore repository; manual end-to-end check with real Firebase accounts |
+| 10 Nov – 6 Dec 2026 (after the midterm week) | Instructor feedback; quality and release work (campaign closing by its owner, coverage gate, mutation testing, Firestore emulator and end-to-end tests, deployment to Render, dependency scanning, accessibility review); user acceptance test with at least five students; final report and presentation. A detailed plan will be made after the midterms. |
 
 Possible extensions if time allows: linking e-mail and phone identities to reduce the two-account risk, campaign
 categories and images, signer comments, and an administrator moderation page.
@@ -453,8 +469,10 @@ Wright, S. (2016). 'Success' and online political participation: The case of Dow
 
 ## ABOUT THE AUTHORS AND AUTHOR CONTRIBUTIONS
 
-<!-- TODO (team): one paragraph per author: academic background, role, tasks performed (use docs/PROJECT_PLAN.md and
-     git history), special responsibilities. -->
+<!-- TODO (team): each author writes one paragraph: academic background, role, tasks performed (use the team's task
+     sheet and the git history), special responsibilities. -->
+
+**STUDENT NAME (Student No.)** — …
 
 **STUDENT NAME (Student No.)** — …
 

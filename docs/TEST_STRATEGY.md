@@ -133,7 +133,7 @@ Testlerin hiçbiri ağa çıkmaz; zaman sabit (`FixedClock`), id'ler sıralı �
 2. CI yeşil kalır ama özet "25 passed, 151 xfailed" gibi ilerlemeyi gösterir; `scripts/check.py` görev tablosu basar.
 3. Geliştirici işareti siler (**Red**), en basit kodu yazar (**Green**), temizler (**Refactor**).
 4. `strict=True`: kod çalıştığı halde işaret silinmezse test **XPASS(strict)** ile başarısız olur → unutulamaz.
-5. Testler eklenmeden önce geçici bir kopyada örnek çözümle hepsinin geçebildiği doğrulanır (bugün: 176/176).
+5. Testler eklenmeden önce geçici bir kopyada örnek çözümle hepsinin geçebildiği doğrulanır (bugün: 183/183).
 
 ## 9. Risk tabanlı test (Hafta 1)
 
