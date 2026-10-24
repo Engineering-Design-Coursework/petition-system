@@ -5,11 +5,12 @@ Bu dosya bu repoda çalışan her ajan (Claude Code vb.) için bağlayıcıdır.
 ## Proje
 CEN317 Engineering Design dönem projesi: change.org benzeri **imza kampanyası platformu**.
 Zorunlu özellikler: kampanya başlatma/destek toplama, **mükerrer imzayı engelleyen e-posta/telefon doğrulaması**,
-**anlık ilerleme çubuğu**, **sosyal medya paylaşımı**. Ekip 2 kişi; biri yalnızca Python biliyor.
+**anlık ilerleme çubuğu**, **sosyal medya paylaşımı**. Ekip 3 kişi; biri yalnızca Python biliyor.
 
 - Mimari ve gerekçeler: `docs/DECISIONS.md`
 - Sözleşme (hangi dosyada hangi sınıf/fonksiyon), test teknikleri, risk tablosu: `docs/TEST_STRATEGY.md`
-- Takvim ve görevler: `docs/PROJECT_PLAN.md`
+- Takvim ve ekip işleri: `docs/PROJECT_PLAN.md`
+- Görev dağılımı (kim, ne zaman): ekibin Google Sheets tablosu "PROJE-TASK MANAGEMENT" (link repoda yok, repo herkese açık)
 - Ders raporu (İngilizce, şablona birebir uygun): `docs/report/INTERIM_REPORT.md`
 
 ## Komutlar
@@ -68,7 +69,8 @@ FastAPI + Jinja2 (sunucu tarafında HTML) + htmx (ilerleme çubuğu yoklaması) 
 - `.env`, `firebase-key*.json`, servis hesabı anahtarları ve diğer sırlar asla commit'lenmez.
 
 ### 4. Belgeleri güncel tut (her anlamlı adımda, aynı commit'te ya da hemen ardından)
-- `docs/PROJECT_PLAN.md`: biten görevlerin kutusu `[x]`, "Son güncelleme" tarihi.
+- Görev tablosu (Google Sheets): görevi alan ve tarihler. Ajan tabloya erişebiliyorsa kendi görevlerini orada günceller.
+- `docs/PROJECT_PLAN.md`: yalnızca takvim ya da ekip işleri değişirse, "Son güncelleme" tarihiyle.
 - `docs/report/INTERIM_REPORT.md` (İngilizce): ilgili bölümler — özellikle *3. Project Materials*,
   *4. Current State of the Project*, *5. Future Improvements*, Appendix (klasör yapısı, test özeti) ve en üstteki
   "Last updated" satırı. Yeni kaynak kullanıldıysa APA 7 ile *References*'a ekle. Uydurma kaynak ekleme;

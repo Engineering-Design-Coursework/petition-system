@@ -136,7 +136,7 @@ git push -u origin gorev/t1-3-ilerleme
 ```
 GitHub'da çıkan **"Compare & pull request"** butonuyla PR aç. GitHub Actions testleri otomatik çalıştırır
 (PR sayfasında yeşil ✓ ya da kırmızı ✗). Yeşilse takım arkadaşın inceleyip merge eder.
-Son olarak [docs/PROJECT_PLAN.md](docs/PROJECT_PLAN.md) içinde görevin kutusunu `[x]` yap.
+Son olarak ekibin görev tablosunda (Google Sheets) görevin tamamlanma tarihini yaz.
 
 ### Hata mesajları ne demek?
 
