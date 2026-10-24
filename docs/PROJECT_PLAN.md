@@ -49,7 +49,7 @@ Görevler kişiye atanmamıştır; ekip kendi arasında paylaşır. Kodlama gör
 - [x] **T2.4** Firebase token doğrulama — `app/auth/verifier.py` → `tests/unit/test_firebase_verifier.py`
 - [ ] **T2.5** İmza sayfası + canlı ilerleme + paylaşım — `app/routes/pages.py` → `tests/integration/test_signing.py` (önce T1.7, T2.2, T2.3)
 - [ ] **T2.6** Firestore veritabanı — `app/repositories/firestore.py` (docstring'deki örnek; elle test, Faz 3'te emulator testi)
-- [ ] **T2.7** Giriş sayfası: Firebase e-posta (doğrulama e-postası) + telefon (SMS) girişi, `static/js/auth.js` (Claude)
+- [x] **T2.7** Giriş sayfası: Firebase e-posta (doğrulama e-postası) + telefon (SMS) girişi, `static/js/auth.js` (Claude)
 - [x] **T2.8** Firebase Console: web uygulaması + servis hesabı anahtarı, `.env` doldurma (README §4)
 - [ ] Gerçek Firebase ile elle deneme: e-posta ile kayıt → doğrulama → imza; aynı hesapla ikinci imza reddedilir
 

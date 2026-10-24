@@ -68,13 +68,14 @@ Testler bu adları `import` eder; kod bu adlarla yazılmak zorundadır. Sözleş
 | `app/clock.py` | `Clock` (Protocol), `SystemClock`, `FixedClock` | saat | hazır |
 | `app/routes/pages.py` | `GET /`, `/health`, `/petitions`, `/petitions/new`, `POST /petitions`, `/petitions/{id}`, `/petitions/{id}/progress`, `POST /petitions/{id}/sign`, `/search?q=` | sayfalar | T1.7, T2.5 |
 | `app/routes/auth.py` | `GET /login`, `POST /session` (form ya da JSON), `POST /logout` | giriş/çıkış | hazır |
+| `app/templates/login.html`, `app/static/js/auth.js` | Firebase modunda `data-email-form`, `data-phone-form`, `#firebase-login[data-config][data-next]` | Firebase girişi | T2.7 |
 
 ## 5. Test seviyeleri ve piramit (Hafta 1–2)
 
 | Seviye | Klasör | Araç | Şu anki sayı | Hedef oran |
 |---|---|---|---|---|
 | Birim (unit) | `tests/unit/` | pytest | 138 | ~%70 |
-| Entegrasyon (API/sayfa) | `tests/integration/` | FastAPI TestClient | 38 | ~%20 |
+| Entegrasyon (API/sayfa) | `tests/integration/` | FastAPI TestClient | 45 | ~%20 |
 | Sistem / E2E | `tests/e2e/` | Playwright (Faz 3) | 0 | ~%10 |
 | Kabul (UAT) | — | sınıf arkadaşları + kabul kriterleri (Faz 4) | — | — |
 

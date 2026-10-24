@@ -324,7 +324,7 @@ solution before it is committed, ensuring that the tests are consistent and achi
 #### 3.3.3. Test levels and test doubles
 
 The suite follows the test pyramid: unit tests for domain rules and services (currently 138), integration tests
-through the FastAPI test client (38), and a small number of browser end-to-end tests planned for Phase 3. The
+through the FastAPI test client (45), and a small number of browser end-to-end tests planned for Phase 3. The
 in-memory repository is used as a *fake*, the token verifier as a *stub*, `unittest.mock.Mock` as a *mock* of the
 Firebase Admin SDK and as a *spy* that records repository calls, and a fixed clock removes time-dependent flakiness.
 A race condition between two simultaneous signatures is simulated by injecting an `AlreadySignedError` into the
@@ -387,6 +387,7 @@ The following parts are complete:
 | T2.3 | Share links | Pending |
 | T2.4 | Firebase token verification | Done |
 | T2.5 | Signing page, live progress, sharing | Pending |
+| T2.7 | Firebase sign-in page (e-mail + SMS) | Done |
 
 <!-- TODO: Figure 4.1 home page screenshot, Figure 4.2 CI summary screenshot, coverage figures. -->
 
@@ -486,10 +487,10 @@ petition-system
   ->auth          (verifier.py, demo.py)
   ->routes        (pages.py, auth.py, deps.py)
   ->templates     (base.html, home.html, login.html, search.html, 404.html, petitions/, partials/)
-  ->static        (css/style.css)
+  ->static        (css/style.css, js/auth.js)
 ->tests
   ->unit          (11 test modules)
-  ->integration   (3 test modules)
+  ->integration   (4 test modules)
   ->helpers.py, conftest.py
 ->scripts/check.py
 ->docs            (PROJECT_PLAN.md, TEST_STRATEGY.md, DECISIONS.md, report/INTERIM_REPORT.md)
