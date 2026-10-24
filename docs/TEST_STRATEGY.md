@@ -160,7 +160,7 @@ RPN = Olasılık (L) × Etki (I) × Tespit zorluğu (D), 1–5 ölçeği. Yükse
 
 ## 11. CI hattı (Hafta 3)
 
-`.github/workflows/ci.yml` — her push ve PR'da: checkout → Python 3.13 + pip önbelleği → paket kurulumu →
+`.github/workflows/ci.yml` — her PR'da ve `main`'e her push'ta: checkout → Python 3.13 + pip önbelleği → paket kurulumu →
 `ruff check` + `ruff format --check` → `pytest --cov=app --cov-branch` → görev özet tablosu (Actions özet sayfası) →
 HTML coverage raporu (indirilebilir artifact). Hedef süre < 2 dk. `main` dalında "CI geçmeden merge yok" kuralı.
 

@@ -1,9 +1,11 @@
-# Her push ve pull request'te otomatik kontrol (CEN315 Hafta 3: CI pipeline).
+# Her pull request'te ve main'e her push'ta otomatik kontrol (CEN315 Hafta 3: CI pipeline).
 # Sıra: statik analiz -> testler + coverage -> özet tablo -> coverage raporu (indirilebilir)
 name: CI
 
 on:
+  # Dallarda PR yeter, aynı commit iki kez test edilmesin
   push:
+    branches: [main]
   pull_request:
 
 permissions:
