@@ -7,9 +7,6 @@ import pytest
 from app.auth.verifier import FirebaseTokenVerifier, InvalidTokenError
 from app.domain.models import User
 
-# GÖREV T2.4 — kodu yazınca BU SATIRI SİL:
-pytestmark = pytest.mark.xfail(strict=True, reason="T2.4 henüz yapılmadı")
-
 
 def test_should_map_firebase_claims_to_user():
     # Arrange

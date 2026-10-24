@@ -56,4 +56,20 @@ class FirebaseTokenVerifier:
 
         token boşsa ya da self._verify_fn herhangi bir hata fırlatırsa InvalidTokenError fırlat.
         """
-        raise NotImplementedError
+        # Boş token Firebase'e gitmez
+        if not id_token:
+            raise InvalidTokenError("Token boş")
+
+        # Firebase'in her hatası geçersiz token sayılır
+        try:
+            claims = self._verify_fn(id_token)
+        except Exception as error:
+            raise InvalidTokenError(str(error)) from error
+
+        return User(
+            uid=claims["uid"],
+            email=claims.get("email"),
+            email_verified=claims.get("email_verified", False),
+            phone_number=claims.get("phone_number"),
+            display_name=claims.get("name"),
+        )
