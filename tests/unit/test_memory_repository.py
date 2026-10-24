@@ -9,9 +9,6 @@ from app.domain.models import Signature
 from app.repositories.memory import InMemoryPetitionRepository
 from tests.helpers import FIXED_NOW, make_petition
 
-# GÖREV T1.5 — kodu yazınca BU SATIRI SİL:
-pytestmark = pytest.mark.xfail(strict=True, reason="T1.5 henüz yapılmadı")
-
 
 @pytest.fixture
 def repo():

@@ -4,7 +4,7 @@
   Items marked TODO need team input; references marked (verify) must be checked before submission.
 -->
 
-> **Last updated:** 23 October 2026 — T1.1, T1.2, T1.3, T1.4 and T2.1 completed.
+> **Last updated:** 24 October 2026 — T1.1–T1.5 and T2.1 completed; Firebase project set up.
 
 <div align="center">
 
@@ -379,7 +379,7 @@ The following parts are complete:
 | T1.2 | Form validation (EP/BVA) | Done |
 | T1.3 | Progress percentage | Done |
 | T1.4 | Turkish-aware search | Done |
-| T1.5 | In-memory repository | Pending |
+| T1.5 | In-memory repository | Done |
 | T1.6 | Campaign service | Pending |
 | T1.7 | Campaign pages | Pending |
 | T2.1 | Signature eligibility (decision table) | Done |
