@@ -13,9 +13,6 @@ from app.domain.models import PetitionStatus, Signature
 from app.services.signature_service import SignatureService
 from tests.helpers import EMAIL_USER, FIXED_NOW, PHONE_USER, UNVERIFIED_USER, make_petition
 
-# GÖREV T2.2 — kodu yazınca BU SATIRI SİL:
-pytestmark = pytest.mark.xfail(strict=True, reason="T2.2 henüz yapılmadı")
-
 
 @pytest.fixture
 def service(repo, clock):
