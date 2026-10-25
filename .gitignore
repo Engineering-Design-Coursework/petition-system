@@ -442,3 +442,4 @@ pytest.log
 mutants/
 firebase-key*.json
 *service-account*.json
+.idea/
