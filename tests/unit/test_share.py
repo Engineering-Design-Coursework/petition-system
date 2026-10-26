@@ -6,9 +6,6 @@ import pytest
 
 from app.domain.share import SHARE_PLATFORMS, build_share_links
 
-# GÖREV T2.3 — kodu yazınca BU SATIRI SİL:
-pytestmark = pytest.mark.xfail(strict=True, reason="T2.3 henüz yapılmadı")
-
 URL = "https://imza.example.com/petitions/42"
 TITLE = "Kampüse bisiklet yolu"
 
