@@ -18,9 +18,6 @@ from tests.helpers import (
     make_petition,
 )
 
-# GÖREV T1.7 — kodu yazınca BU SATIRI SİL:
-pytestmark = pytest.mark.xfail(strict=True, reason="T1.7 henüz yapılmadı")
-
 VALID_FORM = {"title": VALID_TITLE, "description": VALID_DESCRIPTION, "goal": str(VALID_GOAL)}
 
 
