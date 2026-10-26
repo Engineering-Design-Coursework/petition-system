@@ -12,9 +12,6 @@ from app.domain.models import PetitionStatus
 from app.services.petition_service import PetitionService
 from tests.helpers import EMAIL_USER, FIXED_NOW, VALID_DESCRIPTION, VALID_GOAL, VALID_TITLE
 
-# GÖREV T1.6 — kodu yazınca BU SATIRI SİL:
-pytestmark = pytest.mark.xfail(strict=True, reason="T1.6 henüz yapılmadı")
-
 
 @pytest.fixture
 def service(repo, clock):
