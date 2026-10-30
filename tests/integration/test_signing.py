@@ -8,9 +8,6 @@ import pytest
 from app.domain.models import PetitionStatus
 from tests.helpers import login, make_petition
 
-# GÖREV T2.5 — kodu yazınca BU SATIRI SİL:
-pytestmark = pytest.mark.xfail(strict=True, reason="T2.5 henüz yapılmadı")
-
 
 @pytest.fixture
 def petition(repo):

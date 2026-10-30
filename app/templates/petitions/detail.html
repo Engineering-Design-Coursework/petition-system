@@ -15,6 +15,7 @@
     <h1>{{ petition.title }}</h1>
 
     {% if message %}<p class="notice" data-message>{{ message }}</p>{% endif %}
+    {% if error %}<p class="error" data-error>{{ error }}</p>{% endif %}
 
     {% include "partials/progress.html" %}
 
