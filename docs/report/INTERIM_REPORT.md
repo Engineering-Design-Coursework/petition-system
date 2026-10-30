@@ -4,7 +4,7 @@
   Items marked TODO need team input; references marked (verify) must be checked before submission.
 -->
 
-> **Last updated:** 24 October 2026 — T1.1–T1.5, T2.1, T2.4 and T2.7 completed; Firebase project set up.
+> **Last updated:** 30 October 2026 — all 183 contract tests pass; T2.6 Firestore implementation verified with live database checks, pending PR review.
 
 <div align="center">
 
@@ -53,10 +53,10 @@ risk-based (likelihood × impact × detectability) assessment.
 At the time of writing, the architecture, the project skeleton, the continuous integration pipeline, the domain
 rules (user verification, form validation, progress percentage, Turkish-aware search and signature eligibility), the
 in-memory repository and the Firebase sign-in (server-side token verification and an e-mail/SMS sign-in page) are
-complete; 113 of the 183 tests pass and the remaining 70 belong to tasks still in progress.
-<!-- TODO: update with Phase 2 results before submission --> The remaining work covers the campaign and signature
-services and pages, the Firestore repository, deployment, mutation testing, end-to-end tests and a user acceptance
-test with fellow students.
+complete, together with the campaign and signature services and pages and social sharing; all 183 contract tests pass.
+The Firestore repository has also passed live checks for persistence and duplicate-signature transactions and is
+pending PR review. Remaining work includes a full browser check with real Firebase accounts, deployment,
+mutation testing, emulator and end-to-end tests and a user acceptance test with fellow students.
 
 **Keywords:** online petition, duplicate signature prevention, Firebase Authentication, FastAPI, test-driven development
 
@@ -359,7 +359,7 @@ injected faults.
 
 ## 4. CURRENT STATE OF THE PROJECT
 
-*Status on 24 October 2026 (Phase 2 in progress).*
+*Status on 30 October 2026 (T2.6 pending PR review).*
 
 The following parts are complete:
 
@@ -368,15 +368,22 @@ The following parts are complete:
   templates and styling are in place. Without Firebase credentials the application runs in a *demo mode* with an
   in-memory database and predefined demo users, so it can be run on any computer immediately.
 - **Contract test suite for Phases 1 and 2.** 183 tests define the behaviour of thirteen tasks (Table 4.1); every
-  suite was verified against a reference solution before it was added. 113 tests pass and 70 tests belong to tasks
-  that are not finished yet.
+  suite was verified against a reference solution before it was added. All 183 tests pass. These automated tests
+  use the in-memory repository and do not exercise the live Firestore implementation.
 - **Domain rules.** The user verification rule (T1.1, tested with condition/MC/DC cases), campaign form validation
   (T1.2, equivalence partitioning and boundary values), the progress percentage (T1.3, rounded down and capped at
   100 %), Turkish-aware search normalisation (T1.4, e.g. "İ"/"I" and "ü"/"u") and the signature eligibility decision
   table (T2.1). Branch coverage of these modules is 100 %.
 - **In-memory repository (T1.5).** Used as a *fake* in the tests and as the database of the demo mode. It rejects a
-  second signature of the same account on the same campaign, which mirrors the rule the Firestore repository will
-  enforce with a transaction.
+  second signature of the same account on the same campaign, matching the transaction rule in the Firestore repository.
+- **Campaign and signing pages (T1.6, T1.7, T2.2, T2.3, T2.5).** Campaign creation, listing, detail and search,
+  signing eligibility feedback, five-second progress polling and social sharing are implemented.
+- **Firestore repository (T2.6, pending PR review).** Implements campaign storage, recent listings, Turkish-aware
+  search over the latest 200 campaigns and atomic signature creation with a counter update. Live checks created
+  one labelled test campaign and one synthetic signature, confirmed persistence through a fresh client and checked
+  the detail/progress endpoints. Two concurrent attempts by the same synthetic signer produced exactly one signature;
+  a later duplicate and a signature for a nonexistent campaign were rejected. These checks bypass Firebase Auth
+  and do not replace emulator tests or a full browser sign-in test. The two test documents remain in Firestore.
 - **Firebase integration.** A Firebase project was created on the free Spark plan (Firestore in `europe-west1`,
   e-mail/password and phone providers, test phone numbers for development). Team members are added as editors and
   each downloads a personal service-account key that never enters the repository. The server verifies Firebase ID
@@ -395,17 +402,18 @@ The following parts are complete:
 | T1.3 | Progress percentage | Done |
 | T1.4 | Turkish-aware search | Done |
 | T1.5 | In-memory repository | Done |
-| T1.6 | Campaign service | Pending |
-| T1.7 | Campaign pages | Pending |
+| T1.6 | Campaign service | Done |
+| T1.7 | Campaign pages | Done |
 | T2.1 | Signature eligibility (decision table) | Done |
-| T2.2 | Signature service | Pending |
-| T2.3 | Share links | Pending |
+| T2.2 | Signature service | Done |
+| T2.3 | Share links | Done |
 | T2.4 | Firebase token verification | Done |
-| T2.5 | Signing page, live progress, sharing | Pending |
+| T2.5 | Signing page, live progress, sharing | Done |
 | T2.7 | Firebase sign-in page (e-mail + SMS) | Done |
 
-Phase 1 ended on 23 October with the campaign service and pages (T1.6, T1.7) still open; they are being finished
-together with the remaining Phase 2 tasks before the interim report.
+T2.6 is not included in the contract-test table: it has no dedicated automated test suite yet. Its live verification
+is described above; repeatable Firestore Emulator tests remain planned for Phase 3. The 360 px manual mobile check
+(T1.8) found no blocking issue in the inspected home, sign-in/navigation and campaign-creation views.
 
 <!-- TODO: Figure 4.1 home page screenshot, Figure 4.2 CI summary screenshot, coverage figures. -->
 
@@ -417,7 +425,7 @@ Source code excerpts are given in Appendix A and the folder structure in Appendi
 
 | Period | Planned work |
 |---|---|
-| 24 Oct – 1 Nov 2026 | Campaign service and pages, page design, signature service, share links, signing page with the live progress bar, Firestore repository; manual end-to-end check with real Firebase accounts |
+| 30 Oct – 1 Nov 2026 | Review and merge T2.6; perform a full browser end-to-end check with real Firebase accounts; finalise interim-report screenshots and team contributions |
 | 10 Nov – 6 Dec 2026 (after the midterm week) | Instructor feedback; quality and release work (campaign closing by its owner, coverage gate, mutation testing, Firestore emulator and end-to-end tests, deployment to Render, dependency scanning, accessibility review); user acceptance test with at least five students; final report and presentation. A detailed plan will be made after the midterms. |
 
 Possible extensions if time allows: linking e-mail and phone identities to reduce the two-account risk, campaign
