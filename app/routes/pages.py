@@ -14,16 +14,39 @@ PetitionNotFoundError fırlatılırsa uygulama otomatik 404 sayfası döner (app
 from fastapi import APIRouter, Form, Request
 from fastapi.responses import RedirectResponse
 
-from app.domain.errors import ValidationError
+from app.domain.eligibility import SignBlockReason
+from app.domain.errors import NotEligibleError, ValidationError
 from app.domain.progress import progress_percent
+from app.domain.share import build_share_links
 from app.routes.deps import (
     current_user,
     login_redirect,
     petition_service,
     render,
+    signature_service,
 )
 
 router = APIRouter()
+
+
+def _petition_detail_context(
+    request: Request,
+    petition,
+    message: str | None = None,
+    error: str | None = None,
+):
+    """Kampanya detay sayfasının ortak şablon verisini hazırlar."""
+    percent = progress_percent(petition.signature_count, petition.goal)
+    base_url = request.app.state.settings.base_url.rstrip("/")
+    share_url = f"{base_url}/petitions/{petition.id}"
+    return {
+        "petition": petition,
+        "percent": percent,
+        "share_url": share_url,
+        "share_links": build_share_links(share_url, petition.title),
+        "message": message,
+        "error": error,
+    }
 
 
 @router.get("/", name="home")
@@ -113,38 +136,55 @@ def petition_detail(
     signed: int = 0,
 ):
     petition = petition_service(request).get(petition_id)
-    percent = progress_percent(
-        petition.signature_count,
-        petition.goal,
-    )
-
-    base_url = request.app.state.settings.base_url.rstrip("/")
-    share_url = f"{base_url}/petitions/{petition.id}"
     message = "İmzanız alındı, teşekkürler!" if signed == 1 else None
 
     return render(
         request,
         "petitions/detail.html",
-        {
-            "petition": petition,
-            "percent": percent,
-            "share_url": share_url,
-            "share_links": {},
-            "message": message,
-        },
+        _petition_detail_context(request, petition, message=message),
     )
 
 
 @router.get("/petitions/{petition_id}/progress", name="petition_progress")
 def petition_progress(request: Request, petition_id: str):
-    """GÖREV T2.5 — canlı ilerleme uç noktası."""
-    raise NotImplementedError
+    """Canlı ilerleme çubuğu için yalnızca güncellenen HTML parçasını döner."""
+    petition = petition_service(request).get(petition_id)
+    percent = progress_percent(petition.signature_count, petition.goal)
+    return render(
+        request,
+        "partials/progress.html",
+        {"petition": petition, "percent": percent},
+    )
 
 
 @router.post("/petitions/{petition_id}/sign", name="petition_sign")
 def petition_sign(request: Request, petition_id: str):
-    """GÖREV T2.5 — kampanyaya imza atma uç noktası."""
-    raise NotImplementedError
+    """Geçerli oturumdaki kullanıcı adına kampanyayı imzalar."""
+    user = current_user(request)
+    if user is None:
+        return login_redirect(f"/petitions/{petition_id}")
+
+    try:
+        signature_service(request).sign(user, petition_id)
+    except NotEligibleError as exc:
+        error_responses = {
+            SignBlockReason.NOT_VERIFIED: (
+                403,
+                "İmza atabilmek için e-posta adresinizi veya telefon numaranızı doğrulayın.",
+            ),
+            SignBlockReason.ALREADY_SIGNED: (409, "Bu kampanyayı zaten imzaladınız."),
+            SignBlockReason.PETITION_CLOSED: (409, "Bu kampanya imzaya kapalı."),
+        }
+        status_code, detail = error_responses[exc.reason]
+        petition = petition_service(request).get(petition_id)
+        return render(
+            request,
+            "petitions/detail.html",
+            _petition_detail_context(request, petition, error=detail),
+            status_code=status_code,
+        )
+
+    return RedirectResponse(url=f"/petitions/{petition_id}?signed=1", status_code=303)
 
 
 @router.get("/search", name="search")
