@@ -1,7 +1,7 @@
 <!--
   Living draft of the CEN317 interim report. It mirrors the official template section by section.
   Before submission: copy into the Word template, apply its formatting, export to PDF.
-  Items marked TODO need team input; references marked (verify) must be checked before submission.
+  References marked (verify) must be checked before submission.
 -->
 
 > **Last updated:** 31 October 2026 — all 197 automated tests pass; T2.6 Firestore repository merged, verified with live database checks and covered by fake-client unit tests.
@@ -122,7 +122,6 @@ mutation testing, emulator and end-to-end tests and a user acceptance test with 
 | Figure 3.1. System architecture | 5 |
 | Figure 3.2. Signing sequence | 6 |
 | Figure 4.1. Home page (screenshot) | 7 |
-| Figure 4.2. CI run summary (screenshot) | 8 | <!-- TODO: after Render deployment -->
 
 ---
 
@@ -425,7 +424,11 @@ same account, which was rejected with "Bu kampanyayı zaten imzaladınız."
 
 ![Figure 4.1. Home page of the deployed application.](figures/fig4-1-home.png)
 
-<!-- TODO: Figure 4.2 CI summary screenshot (GitHub Actions page), coverage figures. -->
+Line and branch coverage measured with `pytest --cov=app --cov-branch` on 31 October 2026 (197 tests): **96 %** overall
+(525 statements, 100 branches). All domain, service, repository and route modules are at 97–100 %; the uncovered lines
+are the Firebase start-up code in `app/main.py` (64 %), the real Firebase client call in `app/auth/verifier.py` (90 %)
+and one clock line, which are exercised only against real Firebase and are covered by the manual end-to-end check above.
+As discussed in Section 3.3.4, coverage is complemented by planned mutation testing.
 
 Source code excerpts are given in Appendix A and the folder structure in Appendix C.
 
@@ -445,7 +448,8 @@ categories and images, signer comments, and an administrator moderation page.
 
 ## ACKNOWLEDGEMENTS
 
-<!-- TODO (team): advisor and course instructors; state that no external funding (BAP, TÜBİTAK) was received, if so. -->
+We thank our instructor Enes for his guidance and feedback throughout the CEN317 Engineering Design course. This project did not
+receive any external funding or institutional support (such as BAP or TÜBİTAK).
 
 ---
 
@@ -493,14 +497,25 @@ Wright, S. (2016). 'Success' and online political participation: The case of Dow
 
 ## ABOUT THE AUTHORS AND AUTHOR CONTRIBUTIONS
 
-<!-- TODO (team): each author writes one paragraph: academic background, role, tasks performed (use the team's task
-     sheet and the git history), special responsibilities. -->
+The three authors are students of Çukurova University, Faculty of Engineering. Tasks follow the contract-test
+numbering of the project plan (Table 4.1); the attribution below is based on the repository's commit history.
 
-**STUDENT NAME (Student No.)** — …
+**Süleyman Kara (2024555052)** — Project coordination, infrastructure and authentication. Set up the repository, the
+FastAPI project skeleton, the continuous-integration pipeline and the project documentation (architecture decision
+records, test strategy, project plan, README and this report). Created and configured the Firebase project and
+implemented the progress percentage (T1.3), Turkish-aware search (T1.4), the in-memory repository (T1.5), server-side
+Firebase token verification (T2.4) and the e-mail/SMS sign-in page (T2.7). Also coordinated the work with an AI coding
+assistant that wrote the contract tests.
 
-**STUDENT NAME (Student No.)** — …
+**Emir Haydaroğlu (2024555049)** — Domain rules and services. Created the initial system draft and implemented the
+user-verification rule (T1.1), campaign form validation with equivalence-partitioning and boundary-value tests (T1.2),
+the signing-eligibility decision table (T2.1), the signature service (T2.2) and the campaign service (T1.6). Fixed
+repository hygiene issues (ignored IDE files).
 
-**STUDENT NAME (Student No.)** — …
+**Görkem Say (2026555809)** — Pages, sharing and persistence. Implemented the social-media share links (T2.3), the
+campaign pages for listing, creation, detail and search (T1.7), the signing page with live progress polling (T2.5) and
+the Firestore repository (T2.6), including its transaction-based duplicate-signature protection, which he verified
+against the live database with concurrent attempts.
 
 ---
 
@@ -523,7 +538,6 @@ Files to include (final selection after Phase 2): `app/domain/eligibility.py`, `
 
 ![Duplicate signature rejected.](figures/fig-duplicate-blocked.png)
 
-<!-- TODO: the CI summary table and the HTML coverage report. -->
 
 ### Appendix C: Folder Structure
 
