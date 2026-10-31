@@ -121,7 +121,7 @@ mutation testing, emulator and end-to-end tests and a user acceptance test with 
 |---|---|
 | Figure 3.1. System architecture | 5 |
 | Figure 3.2. Signing sequence | 6 |
-| Figure 4.1. Home page (screenshot) | 7 | <!-- TODO: after Render deployment -->
+| Figure 4.1. Home page (screenshot) | 7 |
 | Figure 4.2. CI run summary (screenshot) | 8 | <!-- TODO: after Render deployment -->
 
 ---
@@ -419,7 +419,13 @@ T2.6 is tested with a fake Firestore client; the transaction behaviour is emulat
 tests remain planned for Phase 3. The 360 px manual mobile check
 (T1.8) found no blocking issue in the inspected home, sign-in/navigation and campaign-creation views.
 
-<!-- TODO: Figure 4.1 home page screenshot, Figure 4.2 CI summary screenshot, coverage figures. -->
+The application was deployed on Render and checked end to end on 31 October 2026 with a real Firebase account:
+e-mail sign-in, campaign creation, signing (progress bar updated to 1 / 100, 1 %) and a second signature attempt by the
+same account, which was rejected with "Bu kampanyayı zaten imzaladınız."
+
+![Figure 4.1. Home page of the deployed application.](figures/fig4-1-home.png)
+
+<!-- TODO: Figure 4.2 CI summary screenshot (GitHub Actions page), coverage figures. -->
 
 Source code excerpts are given in Appendix A and the folder structure in Appendix C.
 
@@ -509,7 +515,15 @@ Files to include (final selection after Phase 2): `app/domain/eligibility.py`, `
 
 ### Appendix B: Additional Figures
 
-<!-- TODO: screenshots of every page, the CI summary table and the HTML coverage report. -->
+![Sign-in page.](figures/fig-login.png)
+
+![Campaign creation form.](figures/fig-create-campaign.png)
+
+![Campaign page after signing: success message, progress bar and sharing links.](figures/fig-signed-detail.png)
+
+![Duplicate signature rejected.](figures/fig-duplicate-blocked.png)
+
+<!-- TODO: the CI summary table and the HTML coverage report. -->
 
 ### Appendix C: Folder Structure
 
