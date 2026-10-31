@@ -4,7 +4,7 @@
   Items marked TODO need team input; references marked (verify) must be checked before submission.
 -->
 
-> **Last updated:** 30 October 2026 — all 183 contract tests pass; T2.6 Firestore implementation verified with live database checks, pending PR review.
+> **Last updated:** 31 October 2026 — all 197 automated tests pass; T2.6 Firestore repository merged, verified with live database checks and covered by fake-client unit tests.
 
 <div align="center">
 
@@ -16,11 +16,12 @@ DEPARTMENT OF COMPUTER ENGINEERING
 **INTERIM REPORT**
 
 **DESIGN AND IMPLEMENTATION OF A VERIFIED ONLINE PETITION PLATFORM**
-<!-- TODO: replace with the final project name -->
 
-STUDENT NUMBER – NAME <!-- TODO -->
-STUDENT NUMBER – NAME <!-- TODO -->
-STUDENT NUMBER – NAME <!-- TODO -->
+**PROJECT NAME: PETITION SYSTEM**
+
+2024555052 – Süleyman Kara
+2024555049 – Emir Haydaroğlu
+2026555809 – Görkem Say
 
 NOVEMBER 2026
 ADANA
@@ -53,9 +54,9 @@ risk-based (likelihood × impact × detectability) assessment.
 At the time of writing, the architecture, the project skeleton, the continuous integration pipeline, the domain
 rules (user verification, form validation, progress percentage, Turkish-aware search and signature eligibility), the
 in-memory repository and the Firebase sign-in (server-side token verification and an e-mail/SMS sign-in page) are
-complete, together with the campaign and signature services and pages and social sharing; all 183 contract tests pass.
+complete, together with the campaign and signature services and pages and social sharing; all 197 automated tests pass.
 The Firestore repository has also passed live checks for persistence and duplicate-signature transactions and is
-pending PR review. Remaining work includes a full browser check with real Firebase accounts, deployment,
+merged. Remaining work includes a full browser check with real Firebase accounts, deployment,
 mutation testing, emulator and end-to-end tests and a user acceptance test with fellow students.
 
 **Keywords:** online petition, duplicate signature prevention, Firebase Authentication, FastAPI, test-driven development
@@ -120,8 +121,8 @@ mutation testing, emulator and end-to-end tests and a user acceptance test with 
 |---|---|
 | Figure 3.1. System architecture | 5 |
 | Figure 3.2. Signing sequence | 6 |
-| Figure 4.1. Home page (screenshot) | 7 | <!-- TODO -->
-| Figure 4.2. CI run summary (screenshot) | 8 | <!-- TODO -->
+| Figure 4.1. Home page (screenshot) | 7 | <!-- TODO: after Render deployment -->
+| Figure 4.2. CI run summary (screenshot) | 8 | <!-- TODO: after Render deployment -->
 
 ---
 
@@ -185,6 +186,8 @@ supported by authentication services such as Firebase Authentication (Google, n.
 stronger guarantees but are personal data whose processing is regulated in Türkiye by Law No. 6698 on the Protection
 of Personal Data (KVKK, 2016); this project therefore does not collect them (see Section 3.2).
 
+**Fraud and duplicate signatures in practice.** Operational experience shows why verification matters. After the 2016 referendum petition, the UK Government Digital Service reported concerns over almost 80,000 signatures, including about 30,000 that claimed to be from Vatican City, and announced less reliance on blacklists of disposable e-mail domains in favour of whitelists and aggressive rate limiting (Hill, 2016). An Australian parliamentary committee report describes e-petition systems that check for duplicate names, addresses and e-mail addresses and use e-mail confirmation (House of Representatives Standing Committee on Petitions, n.d.). Because address-based checks can be bypassed with additional e-mail accounts, this project binds one signature to one verified Firebase account per campaign and enforces it in a database transaction; the remaining two-account risk is discussed in Section 5.
+
 **Test-driven development and test design.** TDD, popularised by Beck (2003), writes a failing test before the
 code that makes it pass and then refactors. Test-design techniques such as equivalence partitioning, boundary value
 analysis, decision tables and coverage criteria are described by Ammann and Offutt (2016); test doubles (fakes,
@@ -201,7 +204,6 @@ with mutation testing (DeMillo et al., 1978).
 | UK Parliament petitions | Confirmed e-mail + residency declaration | Count, thresholds | Links | No (national) |
 | **This project** | **Verified e-mail or phone (SMS), one signature per account** | **Auto-refreshing bar** | **5 platforms + Open Graph** | **Yes** |
 
-<!-- TODO (team): add 1–2 more related projects or academic studies and verify the facts above before submission. -->
 
 ---
 
@@ -359,7 +361,7 @@ injected faults.
 
 ## 4. CURRENT STATE OF THE PROJECT
 
-*Status on 30 October 2026 (T2.6 pending PR review).*
+*Status on 31 October 2026 (all planned tasks merged).*
 
 The following parts are complete:
 
@@ -378,12 +380,13 @@ The following parts are complete:
   second signature of the same account on the same campaign, matching the transaction rule in the Firestore repository.
 - **Campaign and signing pages (T1.6, T1.7, T2.2, T2.3, T2.5).** Campaign creation, listing, detail and search,
   signing eligibility feedback, five-second progress polling and social sharing are implemented.
-- **Firestore repository (T2.6, pending PR review).** Implements campaign storage, recent listings, Turkish-aware
+- **Firestore repository (T2.6).** Implements campaign storage, recent listings, Turkish-aware
   search over the latest 200 campaigns and atomic signature creation with a counter update. Live checks created
   one labelled test campaign and one synthetic signature, confirmed persistence through a fresh client and checked
   the detail/progress endpoints. Two concurrent attempts by the same synthetic signer produced exactly one signature;
   a later duplicate and a signature for a nonexistent campaign were rejected. These checks bypass Firebase Auth
-  and do not replace emulator tests or a full browser sign-in test. The two test documents remain in Firestore.
+  and do not replace emulator tests or a full browser sign-in test. The two test documents remain in Firestore. A unit-test suite with a fake Firestore client (campaign storage, listing,
+  search, signature counter, duplicate and missing-campaign errors) was added afterwards.
 - **Firebase integration.** A Firebase project was created on the free Spark plan (Firestore in `europe-west1`,
   e-mail/password and phone providers, test phone numbers for development). Team members are added as editors and
   each downloads a personal service-account key that never enters the repository. The server verifies Firebase ID
@@ -409,10 +412,11 @@ The following parts are complete:
 | T2.3 | Share links | Done |
 | T2.4 | Firebase token verification | Done |
 | T2.5 | Signing page, live progress, sharing | Done |
+| T2.6 | Firestore repository (fake-client unit tests) | Done |
 | T2.7 | Firebase sign-in page (e-mail + SMS) | Done |
 
-T2.6 is not included in the contract-test table: it has no dedicated automated test suite yet. Its live verification
-is described above; repeatable Firestore Emulator tests remain planned for Phase 3. The 360 px manual mobile check
+T2.6 is tested with a fake Firestore client; the transaction behaviour is emulated, so repeatable Firestore Emulator
+tests remain planned for Phase 3. The 360 px manual mobile check
 (T1.8) found no blocking issue in the inspected home, sign-in/navigation and campaign-creation views.
 
 <!-- TODO: Figure 4.1 home page screenshot, Figure 4.2 CI summary screenshot, coverage figures. -->
@@ -425,7 +429,7 @@ Source code excerpts are given in Appendix A and the folder structure in Appendi
 
 | Period | Planned work |
 |---|---|
-| 30 Oct – 1 Nov 2026 | Review and merge T2.6; perform a full browser end-to-end check with real Firebase accounts; finalise interim-report screenshots and team contributions |
+| 30 Oct – 1 Nov 2026 | Perform a full browser end-to-end check with real Firebase accounts; finalise interim-report screenshots and team contributions |
 | 10 Nov – 6 Dec 2026 (after the midterm week) | Instructor feedback; quality and release work (campaign closing by its owner, coverage gate, mutation testing, Firestore emulator and end-to-end tests, deployment to Render, dependency scanning, accessibility review); user acceptance test with at least five students; final report and presentation. A detailed plan will be made after the midterms. |
 
 Possible extensions if time allows: linking e-mail and phone identities to reduce the two-account risk, campaign
@@ -446,15 +450,21 @@ Ammann, P., & Offutt, J. (2016). *Introduction to software testing* (2nd ed.). C
 Beck, K. (2003). *Test-driven development: By example*. Addison-Wesley.
 
 DeMillo, R. A., Lipton, R. J., & Sayward, F. G. (1978). Hints on test data selection: Help for the practicing
-programmer. *Computer, 11*(4), 34–41. (verify pages)
+programmer. *Computer, 11*(4), 34–41. https://doi.org/10.1109/C-M.1978.218136
 
 Google. (n.d.). *Firebase Authentication*. Retrieved October 13, 2026, from https://firebase.google.com/docs/auth
 
 Hale, S. A., Margetts, H., & Yasseri, T. (2013). Petition growth and success rates on the UK No. 10 Downing Street
-website. In *Proceedings of the 5th Annual ACM Web Science Conference* (pp. 132–138). ACM. (verify)
+website. In *Proceedings of the 5th Annual ACM Web Science Conference* (pp. 132–138). ACM.
+
+Hill, R. (2016, August 22). GDS sets out plans to tackle online petition fraud. *PublicTechnology.net*. https://www.publictechnology.net/?p=1584
+
+House of Representatives Standing Committee on Petitions. (n.d.). *Electronic petitioning to the House of
+Representatives*, Chapter 4: Privacy and security concerns. Parliament of Australia.
+https://aphref.aph.gov.au/house/committee/petitions/epetitioning/report/chapter4.htm (verify year)
 
 Inozemtseva, L., & Holmes, R. (2014). Coverage is not strongly correlated with test suite effectiveness. In
-*Proceedings of the 36th International Conference on Software Engineering* (pp. 435–445). ACM. (verify pages)
+*Proceedings of the 36th International Conference on Software Engineering* (pp. 435–445). ACM. https://doi.org/10.1145/2568225.2568271
 
 ISO/IEC. (2011). *Systems and software engineering — Systems and software Quality Requirements and Evaluation
 (SQuaRE) — System and software quality models* (ISO/IEC 25010:2011).
@@ -471,7 +481,7 @@ UK Parliament. (n.d.). *Petitions: UK Government and Parliament*. Retrieved Octo
 https://petition.parliament.uk/help
 
 Wright, S. (2016). 'Success' and online political participation: The case of Downing Street e-petitions.
-*Information, Communication & Society, 19*(6), 843–857. (verify)
+*Information, Communication & Society, 19*(6), 843–857. https://doi.org/10.1080/1369118X.2015.1080285
 
 ---
 
